@@ -24,7 +24,7 @@ h1, h2 { font-weight: 800; line-height: 1.1; margin: 0 0 .4em; }
   display: flex; align-items: center; justify-content: space-between;
   max-width: 1080px; margin: 0 auto; padding: 16px;
 }
-.logo { font-weight: 800; font-size: 1.5rem; color: var(--ink); text-decoration: none; }
+.logo { display: block; line-height: 0; }
 .lang { display: flex; gap: 6px; background: #fff; padding: 5px; border-radius: 999px; box-shadow: var(--shadow); }
 .lang button {
   font: inherit; font-weight: 700; border: 0; cursor: pointer; color: var(--ink);
