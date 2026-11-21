@@ -4,4 +4,4 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.listen(PORT, () => console.log(`LAON Studio running on http://localhost:${PORT}`));
+app.listen(PORT, '127.0.0.1', () => console.log(`LAON Studio running on http://localhost:${PORT}`));
