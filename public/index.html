@@ -8,7 +8,7 @@
 <meta property="og:title" content="LAON Studio">
 <meta property="og:description" content="LAON Studio: games made by NALO. LLICH, KoroKoro and DOPA.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://laon-studio.com/img/hero.svg">
+<meta property="og:image" content="https://laon-studio.com/img/pp.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,6 @@
 </head>
 <body>
 <header class="bar">
-  <a class="logo" href="/"><img src="/img/logo.svg" alt="LAON" width="48" height="48"></a>
   <div class="lang" role="group" aria-label="Language">
     <button type="button" data-lang="en">EN</button>
     <button type="button" data-lang="fr">FR</button>
@@ -26,16 +25,36 @@
 
 <main>
   <section class="hero">
-    <div class="hero-text">
+    <svg class="seal" viewBox="0 0 700 700" role="img" aria-label="NALO, a cartoon seal">
+      <g fill="none" stroke="#000" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+        <g id="lash"><path d="M292 203C290 170 262 135 224 110"/><path d="M286 178C266 152 236 136 203 129"/><path d="M276 162C256 150 232 144 205 142"/><path d="M193 157H256"/></g>
+        <use href="#lash" transform="translate(699 0) scale(-1 1)"/>
+        <path d="M330 354Q352 360 372 354" stroke-width="12"/>
+      </g>
+      <g fill="#000"><circle cx="314" cy="191" r="7"/><circle cx="385" cy="191" r="7"/>
+        <g class="eye"><circle cx="190" cy="282" r="88"/><g class="hl" fill="none" stroke="#fff" stroke-linecap="round"><path d="M152 250Q158 222 190 214" stroke-width="8"/><circle cx="203" cy="213" r="5" fill="#fff" stroke="none"/></g></g><g class="eye"><circle cx="509" cy="282" r="88"/><g class="hl" fill="none" stroke="#fff" stroke-linecap="round"><path d="M471 250Q477 222 509 214" stroke-width="8"/><circle cx="522" cy="213" r="5" fill="#fff" stroke="none"/></g></g>
+        <circle cx="196" cy="453" r="12"/><circle cx="233" cy="490" r="12"/><circle cx="285" cy="464" r="12"/>
+        <circle cx="416" cy="464" r="12"/><circle cx="467" cy="490" r="12"/><circle cx="504" cy="452" r="12"/>
+        <path d="M300 392L402 388L352 455Z" stroke="#000" stroke-width="22" stroke-linejoin="round"/>
+      </g>
+      <circle cx="312" cy="393" r="6" fill="#fff"/>
+      <g class="tongue"><path d="M290 535C274 600 290 648 346 648S428 600 412 535Z" fill="#ff0a78" stroke="#000" stroke-width="20" stroke-linejoin="round"/>
+        <path d="M352 520L354 575" stroke="#000" stroke-width="10" stroke-linecap="round"/>
+        <path d="M318 585Q322 600 336 608" fill="none" stroke="#ff8ec0" stroke-width="8" stroke-linecap="round"/></g>
+      <path d="M128 410C130 500 200 545 300 540C330 538 345 515 352 462C360 515 380 538 420 540C520 545 573 500 575 410" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="hero-card">
       <h1 data-en="LAON Studio" data-fr="LAON Studio">LAON Studio</h1>
       <p data-en="I'm NALO, an artist. This is where I make my games." data-fr="Je suis NALO, artiste. C'est ici que je fais mes jeux.">I'm NALO, an artist. This is where I make my games.</p>
     </div>
-    <img class="hero-img" src="/img/hero.svg" alt="" width="640" height="360">
   </section>
+
+  <div class="band" aria-hidden="true"><div class="track"><span>LLICH ✦ KoroKoro ✦ DOPA ✦ LLICH ✦ KoroKoro ✦ DOPA ✦ </span><span>LLICH ✦ KoroKoro ✦ DOPA ✦ LLICH ✦ KoroKoro ✦ DOPA ✦ </span></div></div>
 
   <section class="games">
     <article class="card c1">
       <img src="/img/llich.svg" alt="LLICH" width="640" height="360" loading="lazy">
+      <span class="sticker" aria-hidden="true">3D!</span>
       <div class="body">
         <span class="tag" data-en="In development" data-fr="En développement">In development</span>
         <h2>LLICH</h2>
