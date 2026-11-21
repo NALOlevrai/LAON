@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="LAON Studio — interactive experiment lab: mini-games, Node.js and a simple roadmap to put your game online.">
+<meta name="theme-color" content="#06070c">
+<title>LAON Studio — Interactive Experiment Lab</title>
+<style>
+:root{--bg:#06070c;--card:rgba(255,255,255,.04);--line:rgba(255,255,255,.09);--tx:#f1f3fb;--mu:#9aa1bd;--cy:#22e4ff;--pk:#ff3d9a;--vi:#8b5cff;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(900px 500px at 10% -5%,rgba(34,228,255,.12),transparent 60%),radial-gradient(800px 500px at 95% 5%,rgba(255,61,154,.12),transparent 60%),radial-gradient(700px 500px at 50% 110%,rgba(139,92,255,.12),transparent 60%)}
+a{color:var(--cy)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+#pb{position:fixed;top:0;left:0;height:3px;width:0;z-index:30;background:linear-gradient(90deg,var(--cy),var(--vi),var(--pk));box-shadow:0 0 12px var(--cy)}
+nav{position:fixed;top:12px;left:0;right:0;z-index:20;pointer-events:none}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:54px;gap:12px;pointer-events:auto;background:rgba(12,14,22,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:99px;max-width:860px;padding:0 10px 0 22px}
+.logo{font-weight:800;letter-spacing:.16em;color:var(--tx);text-decoration:none;font-size:15px}
+.logo b{color:var(--cy)}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav ul a{display:block;color:var(--mu);text-decoration:none;font-size:14px;padding:8px 14px;border-radius:99px;white-space:nowrap;transition:.2s}
+nav ul a:hover{color:var(--tx);background:rgba(255,255,255,.07)}
+.hero{position:relative;overflow:hidden;padding:170px 0 90px;text-align:center}
+#bg{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+.hero .wrap{position:relative;z-index:1}
+.tag{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 16px;font-size:13px;color:var(--mu);margin-bottom:26px;backdrop-filter:blur(8px)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cy);margin-right:10px;animation:pl 1.6s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(34,228,255,.7)}100%{box-shadow:0 0 0 10px transparent}}
+h1{font-size:clamp(3rem,12vw,7.2rem);margin:0 0 18px;line-height:.98;letter-spacing:-.045em;font-weight:800}
+.grad{background:linear-gradient(90deg,var(--cy),var(--vi),var(--pk),var(--cy));background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:250% center}}
+.hero p{max-width:600px;margin:0 auto 34px;color:var(--mu);font-size:1.15rem}
+.hero b{color:var(--tx)}
+.btn{display:inline-block;padding:13px 26px;border-radius:12px;font-weight:600;text-decoration:none;border:1px solid var(--line);color:var(--tx);margin:5px;cursor:pointer;background:var(--card);font-size:15px;font-family:inherit;transition:.25s;backdrop-filter:blur(8px)}
+.btn:hover{transform:translateY(-2px);border-color:var(--cy);box-shadow:0 8px 30px -8px rgba(34,228,255,.5)}
+.btn.main{background:linear-gradient(90deg,var(--cy),#4aa8ff,var(--vi));color:#02141a;border-color:transparent}
+.btn.pk:hover{border-color:var(--pk);box-shadow:0 8px 30px -8px rgba(255,61,154,.5)}
+.road{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;margin-top:54px;font-size:14px}
+.road span{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:7px 16px;animation:fl 4s ease-in-out infinite}
+.road span:nth-of-type(2){animation-delay:.5s}.road span:nth-of-type(3){animation-delay:1s}.road span:nth-of-type(4){animation-delay:1.5s}
+.road i{color:var(--pk);font-style:normal}
+@keyframes fl{50%{transform:translateY(-6px)}}
+.hero .tag,.hero h1,.hero p,.hero .cta{animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+.hero h1{animation:up .9s .1s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 .grad{animation:sh 6s linear infinite}
+.hero p{animation-delay:.25s}.hero .cta{animation-delay:.4s}
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.marq{border-block:1px solid var(--line);background:rgba(255,255,255,.02);overflow:hidden;white-space:nowrap;padding:14px 0}
+.marq div{display:inline-block;animation:mq 30s linear infinite;color:var(--mu);font-size:14px;letter-spacing:.2em;text-transform:uppercase}
+.marq span{margin:0 26px}.marq em{color:var(--pk);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:96px 0}
+h2{font-size:clamp(1.9rem,5vw,2.8rem);margin:0 0 10px;letter-spacing:-.03em;line-height:1.1}
+h2::after{content:"";display:block;width:56px;height:3px;margin-top:14px;background:linear-gradient(90deg,var(--cy),var(--pk));border-radius:2px}
+.sub{color:var(--mu);margin:0 0 38px;max-width:620px}
+.lab,.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden}
+.lab::before,.card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(34,228,255,.14),transparent 60%)}
+.lab:hover::before,.card:hover::before{opacity:1}
+.lab{padding:20px;box-shadow:0 0 80px -20px rgba(139,92,255,.35)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{flex:1;min-width:120px;padding:11px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--mu);cursor:pointer;font:inherit;transition:.2s}
+.tabs button:hover{color:var(--tx)}
+.tabs button.on{border-color:var(--pk);color:var(--tx);background:rgba(255,61,154,.12);box-shadow:0 0 18px rgba(255,61,154,.25)}
+.bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;font-size:14px;color:var(--mu)}
+.bar b{color:var(--cy);font-size:1.1em}
+canvas#cv{width:100%;height:auto;display:block;background:#04050a;border-radius:14px;border:1px solid var(--line);touch-action:none;cursor:crosshair}
+.hint{font-size:13px;color:var(--mu);margin:12px 0 0}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{padding:26px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.card:hover{border-color:rgba(34,228,255,.5);transform:translateY(-4px);box-shadow:0 18px 50px -18px rgba(34,228,255,.35)}
+.card h3{margin:8px 0 8px;font-size:1.15rem;position:relative}
+.card p{margin:0;color:var(--mu);font-size:15px;position:relative}
+.wip{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pk);border:1px solid rgba(255,61,154,.5);border-radius:99px;padding:3px 12px;position:relative}
+.ico{display:inline-block;font-size:30px;transition:.3s;position:relative}
+.card:hover .ico{transform:scale(1.2) rotate(-8deg)}
+.num{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-weight:800;color:#02141a;background:linear-gradient(135deg,var(--cy),var(--pk));margin-bottom:14px;position:relative}
+pre{margin:16px 0 0;background:rgba(0,0,0,.4);border:1px solid var(--line);border-left:3px solid var(--cy);border-radius:10px;padding:14px;overflow-x:auto;font:12.5px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#bfeaff;max-width:100%;position:relative}
+.contact{text-align:center}
+.contact h2::after{margin-left:auto;margin-right:auto}
+.contact .sub{margin-left:auto;margin-right:auto}
+.cbox{border:1px solid var(--line);border-radius:28px;padding:64px 22px;background:linear-gradient(135deg,rgba(34,228,255,.08),rgba(255,61,154,.08))}
+footer{padding:30px 0;text-align:center;color:var(--mu);font-size:14px;border-top:1px solid var(--line)}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.grid .reveal:nth-child(2){transition-delay:.12s}.grid .reveal:nth-child(3){transition-delay:.24s}
+@media(max-width:560px){nav .wrap{padding-left:16px}.logo{font-size:13px}nav ul a{padding:8px 9px;font-size:13px}section{padding:70px 0}.hero{padding-top:140px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<nav><div class="wrap"><a class="logo" href="#top">LAON<b>.</b>STUDIO</a>
+<ul><li><a href="#games">Games</a></li><li><a href="#process">Roadmap</a></li><li><a href="#docs">Guides</a></li><li><a href="#contact">Contact</a></li></ul></div></nav>
+
+<header class="hero" id="top"><canvas id="bg"></canvas><div class="wrap">
+<span class="tag"><i class="dot"></i>Free lab for beginners</span>
+<h1>LAON <span class="grad">Studio</span></h1>
+<p>Learn how to build a website for your games, <b>from A to Z</b>: play the demos, then follow the simple roadmap with Node.js.</p>
+<div class="cta"><a class="btn main" href="https://linktr.ee/NALOlevrai" target="_blank" rel="noopener">Open our Linktree →</a>
+<a class="btn pk" href="#games">Play a demo</a></div>
+<div class="road"><span>💡 Idea</span><i>→</i><span>🎮 Game</span><i>→</i><span>⚙️ Node.js server</span><i>→</i><span>🌍 Online</span></div>
+</div></header>
+
+<div class="marq"><div><span>Canvas</span><em>✦</em><span>JavaScript</span><em>✦</em><span>Node.js</span><em>✦</em><span>Nginx</span><em>✦</em><span>PM2</span><em>✦</em><span>WebSockets</span><em>✦</em><span>Canvas</span><em>✦</em><span>JavaScript</span><em>✦</em><span>Node.js</span><em>✦</em><span>Nginx</span><em>✦</em><span>PM2</span><em>✦</em><span>WebSockets</span><em>✦</em></div></div>
+
+<section id="games"><div class="wrap">
+<h2>Mini-Game Lab</h2>
+<p class="sub">Three tiny games, written in plain Canvas + JavaScript. Pick one and play — no install needed.</p>
+<div class="lab">
+<div class="tabs" id="tabs"><button data-g="0" class="on">🐍 Neon Snake</button><button data-g="1">☄️ Orb Dodge</button><button data-g="2">🎯 Pulse Tap</button></div>
+<div class="bar"><span>Score: <b id="sc">0</b></span><span>Best: <b id="bs">0</b></span><button class="btn" id="go" style="padding:7px 18px;margin:0">Start</button></div>
+<canvas id="cv" width="480" height="320"></canvas>
+<p class="hint" id="hint"></p>
+</div></div></section>
+
+<section id="process"><div class="wrap">
+<h2>From Zero to Online</h2>
+<p class="sub">The simple path to host a Node.js game site, in three steps.</p>
+<div class="grid">
+<div class="card"><div class="num">1</div><h3>Secure your VPS</h3><p>Open only ports 22, 80 and 443 with your provider's Ingress rules and iptables.</p><pre>iptables -A INPUT -p tcp -m multiport --dports 22,80,443 -j ACCEPT</pre></div>
+<div class="card"><div class="num">2</div><h3>Nginx + free HTTPS</h3><p>Nginx forwards laon-studio.com to your app, Certbot adds the Let's Encrypt certificate.</p><pre>sudo certbot --nginx -d laon-studio.com</pre></div>
+<div class="card"><div class="num">3</div><h3>Node.js kept alive</h3><p>PM2 runs your Express server 24/7 with auto-restart and logs.</p><pre>pm2 start server.js --name laon-api</pre></div>
+</div></div></section>
+
+<section id="docs"><div class="wrap">
+<h2>Guides</h2>
+<p class="sub">Short beginner guides, coming soon.</p>
+<div class="grid">
+<article class="card"><span class="ico">🤖</span><h3>AI in your IDE</h3><p>Set up Claude AI and Skills in VS Code or IntelliJ.</p><span class="wip">Coming soon</span></article>
+<article class="card"><span class="ico">🌐</span><h3>Linux &amp; Network</h3><p>Redirects, reverse proxy and port routing, made simple.</p><span class="wip">Coming soon</span></article>
+<article class="card"><span class="ico">🎮</span><h3>Multiplayer with WebSockets</h3><p>Real-time Node.js games, JSON mods and particle effects.</p><span class="wip">Coming soon</span></article>
+</div></div></section>
+
+<section id="contact" class="contact"><div class="wrap"><div class="cbox">
+<h2>Contact &amp; Links</h2>
+<p class="sub">Questions, ideas or want to build something together? Say hello.</p>
+<a class="btn main" href="mailto:hello@laon-studio.com">hello@laon-studio.com</a>
+<a class="btn" href="https://linktr.ee/NALOlevrai" target="_blank" rel="noopener">Linktree</a>
+</div></div></section>
+<footer>© <span id="yr"></span> LAON Studio — built to experiment.</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=480,H=320;
+const $=id=>document.getElementById(id);
+let cur=0,run=false,score=0,last=0,mouse={x:W/2,y:H/2},best=[0,0,0];
+const R=(a,b)=>a+Math.random()*(b-a);
+function pos(e){const r=cv.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:(t.clientX-r.left)*W/r.width,y:(t.clientY-r.top)*H/r.height}}
+const G=[
+{hint:'Arrow keys / WASD or swipe to steer. Eat the pink dots.',
+ init(){this.s=[{x:12,y:8},{x:11,y:8},{x:10,y:8}];this.d={x:1,y:0};this.nd=this.d;this.f=this.food();this.t=0},
+ food(){return{x:Math.floor(R(0,24)),y:Math.floor(R(0,16))}},
+ update(dt){this.t+=dt;if(this.t<.1)return;this.t=0;this.d=this.nd;const h={x:this.s[0].x+this.d.x,y:this.s[0].y+this.d.y};
+  if(h.x<0||h.y<0||h.x>=24||h.y>=16||this.s.some(p=>p.x==h.x&&p.y==h.y))return end();
+  this.s.unshift(h);if(h.x==this.f.x&&h.y==this.f.y){score+=10;this.f=this.food()}else this.s.pop()},
+ draw(){ctx.fillStyle='#ff3d9a';ctx.shadowColor='#ff3d9a';ctx.shadowBlur=12;ctx.fillRect(this.f.x*20+4,this.f.y*20+4,12,12);
+  ctx.fillStyle='#22e4ff';ctx.shadowColor='#22e4ff';this.s.forEach(p=>ctx.fillRect(p.x*20+1,p.y*20+1,18,18));ctx.shadowBlur=0},
+ key(k){const m={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]}[k];
+  if(m&&!(m[0]==-this.d.x&&m[1]==-this.d.y))this.nd={x:m[0],y:m[1]}},
+ swipe(dx,dy){this.key(Math.abs(dx)>Math.abs(dy)?(dx>0?'d':'a'):(dy>0?'s':'w'))}},
+{hint:'Move your mouse / finger. Dodge the falling blocks as long as you can.',
+ init(){this.b=[];this.t=0;this.sp=130},
+ update(dt){score+=dt*10;this.sp+=dt*4;this.t-=dt;if(this.t<=0){this.t=Math.max(.25,.7-score/400);const w=R(16,46);this.b.push({x:R(0,W-w),y:-20,w,h:R(14,30),v:this.sp*R(.8,1.3)})}
+  this.b.forEach(o=>o.y+=o.v*dt);this.b=this.b.filter(o=>o.y<H+40);
+  for(const o of this.b){const cx=Math.max(o.x,Math.min(mouse.x,o.x+o.w)),cy=Math.max(o.y,Math.min(mouse.y,o.y+o.h));
+   if((cx-mouse.x)**2+(cy-mouse.y)**2<64)return end()}},
+ draw(){ctx.fillStyle='#ff3d9a';ctx.shadowColor='#ff3d9a';ctx.shadowBlur=10;this.b.forEach(o=>ctx.fillRect(o.x,o.y,o.w,o.h));
+  ctx.fillStyle='#22e4ff';ctx.shadowColor='#22e4ff';ctx.beginPath();ctx.arc(mouse.x,mouse.y,8,0,7);ctx.fill();ctx.shadowBlur=0}},
+{hint:'Click or tap the circles before they vanish. 3 misses and it is over.',
+ init(){this.c=[];this.t=0;this.l=3;this.p=[]},
+ update(dt){this.t-=dt;if(this.t<=0){this.t=Math.max(.45,1.1-score/300);this.c.push({x:R(40,W-40),y:R(40,H-40),r:34,life:1.6-Math.min(.7,score/400)})}
+  this.c.forEach(o=>{o.life-=dt;o.r=34*Math.max(o.life,0)/1.6*1.6});
+  this.c=this.c.filter(o=>{if(o.life<=0){this.l--;return false}return true});
+  this.p.forEach(q=>{q.x+=q.vx*dt;q.y+=q.vy*dt;q.a-=dt*2});this.p=this.p.filter(q=>q.a>0);
+  if(this.l<=0)end()},
+ draw(){this.c.forEach(o=>{ctx.strokeStyle='#22e4ff';ctx.shadowColor='#22e4ff';ctx.shadowBlur=14;ctx.lineWidth=3;ctx.beginPath();ctx.arc(o.x,o.y,Math.max(o.r,2),0,7);ctx.stroke()});
+  ctx.shadowBlur=0;this.p.forEach(q=>{ctx.globalAlpha=q.a;ctx.fillStyle='#ff3d9a';ctx.fillRect(q.x,q.y,3,3)});ctx.globalAlpha=1;
+  ctx.fillStyle='#ff3d9a';ctx.font='16px system-ui';ctx.fillText('♥'.repeat(Math.max(this.l,0)),10,24)},
+ click(p){for(let i=this.c.length-1;i>=0;i--){const o=this.c[i];if((o.x-p.x)**2+(o.y-p.y)**2<=(o.r+8)**2){score+=10;for(let k=0;k<14;k++)this.p.push({x:o.x,y:o.y,vx:R(-120,120),vy:R(-120,120),a:1});this.c.splice(i,1);return}}}}
+];
+function end(){run=false;score=Math.floor(score);best[cur]=Math.max(best[cur],score);$('bs').textContent=best[cur];$('go').textContent='Play again';$('sc').textContent=score}
+function start(){score=0;G[cur].init();run=true;last=performance.now();$('go').textContent='Restart'}
+function loop(t){const dt=Math.min((t-last)/1000,.05);last=t;ctx.clearRect(0,0,W,H);
+ ctx.strokeStyle='rgba(34,228,255,.06)';ctx.lineWidth=1;for(let x=0;x<W;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=0;y<H;y+=20){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+ if(run){G[cur].update(dt);if(run)$('sc').textContent=Math.floor(score)}
+ if(G[cur].s||G[cur].b||G[cur].c){G[cur].draw()}
+ if(!run){ctx.fillStyle='rgba(5,6,10,.6)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#e8ebf5';ctx.textAlign='center';ctx.font='bold 22px system-ui';ctx.fillText(score?'Game over — '+score+' pts':'Press Start',W/2,H/2);ctx.textAlign='left'}
+ requestAnimationFrame(loop)}
+function select(i){cur=i;run=false;score=0;G[i].init();$('sc').textContent=0;$('bs').textContent=best[i];$('hint').textContent=G[i].hint;$('go').textContent='Start';
+ document.querySelectorAll('#tabs button').forEach((b,j)=>b.classList.toggle('on',j==i))}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>select(+b.dataset.g));
+$('go').onclick=start;
+cv.addEventListener('mousemove',e=>mouse=pos(e));
+cv.addEventListener('touchmove',e=>{mouse=pos(e)},{passive:true});
+let ts=null;
+cv.addEventListener('touchstart',e=>{ts=pos(e);mouse=ts;if(run&&G[cur].click)G[cur].click(ts)},{passive:true});
+cv.addEventListener('touchend',e=>{if(!ts)return;const p=mouse;if(run&&G[cur].swipe)G[cur].swipe(p.x-ts.x,p.y-ts.y);ts=null});
+cv.addEventListener('mousedown',e=>{if(run&&G[cur].click)G[cur].click(pos(e))});
+addEventListener('keydown',e=>{if(run&&G[cur].key){if(e.key.startsWith('Arrow'))e.preventDefault();G[cur].key(e.key.length==1?e.key.toLowerCase():e.key)}});
+select(0);requestAnimationFrame(t=>{last=t;loop(t)});
+
+(()=>{const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('.lab,.card,h2,.sub').forEach(e=>e.classList.add('reveal'));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+addEventListener('scroll',()=>{$('pb').style.width=scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)*100+'%'},{passive:true});
+const c=$('bg'),x=c.getContext('2d');let w,h,P=[];
+function rs(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;P=Array.from({length:Math.min(70,w/12|0)},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,k:Math.random()<.5}))}
+rs();addEventListener('resize',rs);
+(function f(){x.clearRect(0,0,w,h);P.forEach((p,i)=>{if(!rm){p.x=(p.x+p.vx+w)%w;p.y=(p.y+p.vy+h)%h}const col=p.k?'#22e4ff':'#ff3d9a';x.fillStyle=col;x.globalAlpha=.8;x.fillRect(p.x,p.y,2,2);
+for(let j=i+1;j<P.length;j++){const q=P[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<100){x.globalAlpha=(1-d/100)*.25;x.strokeStyle=col;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}});requestAnimationFrame(f)})()})();
+</script>
+<script>
+document.querySelectorAll('.lab,.card').forEach(e=>e.addEventListener('pointermove',ev=>{const r=e.getBoundingClientRect();e.style.setProperty('--mx',ev.clientX-r.left+'px');e.style.setProperty('--my',ev.clientY-r.top+'px')}));
+</script>
+</body>
+</html>
