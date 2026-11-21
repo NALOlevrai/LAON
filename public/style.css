@@ -34,8 +34,9 @@ main { overflow-x: clip; }
 
 .hero { display: grid; gap: 28px; align-items: center; padding: 8px 0 24px; }
 .pp { width: min(100%, 360px); margin-inline: auto; cursor: pointer; transition: transform .15s ease-out; }
-.pp.spin { animation: spin .6s ease-in-out; }
-@keyframes spin { to { transform: rotate(360deg); } }
+.pp.spin { animation: spin 1s cubic-bezier(.3, 1.3, .5, 1); }
+/* explicit "from": interpolating from the inline tilt transform would collapse 0 and 360deg into the same matrix */
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(720deg); } }
 
 .hero-card {
   background: linear-gradient(135deg, var(--yellow), var(--pink)); border: var(--line);
